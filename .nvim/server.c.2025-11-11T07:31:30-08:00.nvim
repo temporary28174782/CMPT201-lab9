@@ -40,8 +40,7 @@ void *handle_client(void *arg) {
   char buf[512];
   while (1) {
 
-    int read_size = read(client->cfd, buf, 512);
-    if (read_size <= 0) {
+    if (read(client->cfd, buf, 512) < 0) {
       break;
     }
 
@@ -50,12 +49,7 @@ void *handle_client(void *arg) {
     int temp_count = total_message_count;
     pthread_mutex_unlock(&count_mutex);
 
-    char *temp = (char *)malloc(1024 * sizeof(char));
-
-    snprintf(temp, 1024, "Msg #%4d; Client ID %d: ", temp_count,
-             client->client_id);
-    write(STDOUT_FILENO, temp, strlen(temp));
-    write(STDOUT_FILENO, buf, read_size);
+    printf("Msg #%4d; Client ID %d: %s\n", temp_count, client->client_id, buf);
   }
 
   printf("Ending thread for client %d\n", client->client_id);

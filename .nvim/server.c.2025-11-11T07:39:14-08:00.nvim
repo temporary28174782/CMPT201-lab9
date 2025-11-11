@@ -50,11 +50,7 @@ void *handle_client(void *arg) {
     int temp_count = total_message_count;
     pthread_mutex_unlock(&count_mutex);
 
-    char *temp = (char *)malloc(1024 * sizeof(char));
-
-    snprintf(temp, 1024, "Msg #%4d; Client ID %d: ", temp_count,
-             client->client_id);
-    write(STDOUT_FILENO, temp, strlen(temp));
+    printf("Msg #%4d; Client ID %d: ", temp_count, client->client_id);
     write(STDOUT_FILENO, buf, read_size);
   }
 

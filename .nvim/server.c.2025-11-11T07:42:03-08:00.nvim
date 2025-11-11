@@ -52,9 +52,7 @@ void *handle_client(void *arg) {
 
     char *temp = (char *)malloc(1024 * sizeof(char));
 
-    snprintf(temp, 1024, "Msg #%4d; Client ID %d: ", temp_count,
-             client->client_id);
-    write(STDOUT_FILENO, temp, strlen(temp));
+    snprintf(temp, 1024, "Msg #%4d; Client ID %d: ", temp_count, client->client_id);
     write(STDOUT_FILENO, buf, read_size);
   }
 
